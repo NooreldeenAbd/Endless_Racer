@@ -9,27 +9,20 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 direction;
     private Vector3 touchPosition;
 
+    private float mapWidth = 6f;
+
 
     private void Start()
     {
         playerBody = GetComponent<Rigidbody2D>();
     }
 
-    void Update()
+
+    private void FixedUpdate()
     {
-        if (Input.touchCount > 0)
-        {
-            Touch t = Input.GetTouch(0);
-            touchPosition = Camera.main.ScreenToWorldPoint(t.position);
-            touchPosition.z = 0;
-
-            direction = (touchPosition - transform.position);
-
-            playerBody.velocity = new Vector2(direction.x, direction.y) * speed;
-
-            if (t.phase == TouchPhase.Ended)
-                playerBody.velocity = Vector2.zero;
-
-        }
+        float x = Input.GetAxis("Horizontal") * Time.fixedDeltaTime * speed;
+        Vector2 newPosition = playerBody.position + Vector2.right * x;
+        newPosition.x = Mathf.Clamp(newPosition.x, -mapWidth, mapWidth);
+        playerBody.MovePosition(newPosition);
     }
 }
