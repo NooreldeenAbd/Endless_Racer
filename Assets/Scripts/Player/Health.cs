@@ -22,6 +22,7 @@ public class Health : MonoBehaviour
     public void TakeDamage(float damage)
     {
         currentHealth = Mathf.Clamp(currentHealth - damage, 0, startingHealth);
+        Debug.Log(currentHealth);
         if (currentHealth > 0)
         {
             // player hurt
@@ -34,7 +35,7 @@ public class Health : MonoBehaviour
         }
     }
 
-    public void addHealth(float _value)
+    public void AddHealth(float _value)
     {
         currentHealth = Mathf.Clamp(currentHealth + _value, 0, startingHealth);
     }
