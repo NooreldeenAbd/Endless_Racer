@@ -3,7 +3,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
-    private TouchControls touchControls;
+    private Controls controls;
     //private InputManager inputManager;
     private Rigidbody2D rb;
     private Vector2 direction;
@@ -14,26 +14,26 @@ public class PlayerMovement : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        touchControls = new TouchControls();
+        controls = new Controls();
         isTouching = false;
     }
 
     // Called every time the object is enabled
     private void OnEnable()
     {
-        touchControls.Enable();
+        controls.Enable();
     }
 
     // Called every time the object is disabled
     private void OnDisable()
     {
-        touchControls.Disable();
+        controls.Disable();
     }
 
     private void Start()
     {
-        touchControls.Touch.TouchPress.started += ctx => StartTouch(ctx);
-        touchControls.Touch.TouchPress.canceled += ctx => EndTouch(ctx);
+        controls.Player.TouchPress.started += ctx => StartTouch(ctx);
+        controls.Player.TouchPress.canceled += ctx => EndTouch(ctx);
     }
 
     private void StartTouch(InputAction.CallbackContext ctx)
@@ -50,7 +50,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (isTouching)
         {
-            Vector2 touchPositionScreen = touchControls.Touch.TouchPosition.ReadValue<Vector2>();
+            Vector2 touchPositionScreen = controls.Player.Move.ReadValue<Vector2>();
             Vector3 touchPositionWorld = Camera.main.ScreenToWorldPoint(touchPositionScreen);
             touchPositionWorld.z = 0;
 
