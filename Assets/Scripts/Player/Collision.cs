@@ -7,9 +7,8 @@ public class Collision : MonoBehaviour
 
     // Triggered when another box collider2D enters 
     // Other in this case should be teh player
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.tag == "Player")
-            other.GetComponent<Health>().TakeDamage(damage);
+        GetComponent<Health>().TakeDamage(damage);
     }
 }

@@ -1,9 +1,11 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 public class SpawnEnemy : MonoBehaviour
 {
-    public Transform[] spwanPoints;
-    public GameObject enemyPrefab;
+    public Transform[] spawnPoints;
+    public GameObject[] enemyPrefabs;
+    private List<int> spawnList = new List<int>();
     private float timeToSpawn = 2f;
     private float timeBetweenSpawns = 1f;
 
@@ -19,13 +21,24 @@ public class SpawnEnemy : MonoBehaviour
 
     private void SpawnBlocks()
     {
-        int rand = Random.Range(0, spwanPoints.Length);
-        for (int i = 0; i < spwanPoints.Length; i++)
+        RandomizeSpawnPoints();
+        for (int i = 0; i < spawnPoints.Length; i++)
         {
-            if (rand != i)
+            if (spawnList.Contains(i))
             {
-                Instantiate(enemyPrefab, spwanPoints[i].position, Quaternion.identity);
+                Instantiate(enemyPrefabs[0], spawnPoints[i].position, Quaternion.identity);
             }
+        }
+    }
+
+    private void RandomizeSpawnPoints()
+    {
+        int rand = Random.Range(1, spawnPoints.Length);
+        spawnList.Clear();
+
+        for (int i = 0; i <= rand; i++)
+        {
+            spawnList.Add(Random.Range(0, spawnPoints.Length));
         }
     }
 }
