@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Health : MonoBehaviour
 {
@@ -22,7 +23,6 @@ public class Health : MonoBehaviour
     public void TakeDamage(float damage)
     {
         currentHealth = Mathf.Clamp(currentHealth - damage, 0, startingHealth);
-        Debug.Log(currentHealth);
         if (currentHealth > 0)
         {
             // player hurt
@@ -32,6 +32,7 @@ public class Health : MonoBehaviour
         {
             // player dead
             Debug.Log("Player is Dead");
+            OnDeath();
         }
     }
 
@@ -55,5 +56,10 @@ public class Health : MonoBehaviour
         }
 
         //Physics2D.IgnoreLayerCollision(6, 8, false);
+    }
+
+    private void OnDeath()
+    {
+        FindObjectOfType<GameManager>().EndGame();
     }
 }
