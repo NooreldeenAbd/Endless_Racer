@@ -9,6 +9,9 @@ public class Health : MonoBehaviour
     public float currentHealth { get; private set; }
     private bool dead;
 
+    [Header("HealthBar")]
+    public HealthBarHandler healthBar;
+
     [Header("iFrames")]
     [SerializeField] private float iFramesDuration;
     [SerializeField] private int numFlashes;
@@ -17,12 +20,14 @@ public class Health : MonoBehaviour
     private void Awake()
     {
         currentHealth = startingHealth;
+        healthBar.SetMaxHealth(startingHealth);
         sprietRen = GetComponent<SpriteRenderer>();
     }
 
     public void TakeDamage(float damage)
     {
         currentHealth = Mathf.Clamp(currentHealth - damage, 0, startingHealth);
+        healthBar.SetHealth(currentHealth);
         if (currentHealth > 0)
         {
             // player hurt
