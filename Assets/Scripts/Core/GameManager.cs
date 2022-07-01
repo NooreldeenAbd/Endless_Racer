@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
         Time.fixedDeltaTime = Time.fixedDeltaTime * timeModulationFactor;
 
         // Let the game do its thing for 2 sec
-        yield return new WaitForSeconds(2f * timeModulationFactor);
+        yield return new WaitForSeconds(1f * timeModulationFactor);
 
         // Return time back to normal and load a new scene
         Time.timeScale = 1f;
