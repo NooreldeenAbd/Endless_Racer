@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     private float timeModulationFactor = 1f / 10f;
+
     public void EndGame()
     {
         StartCoroutine(RestartLevel());
