@@ -48,19 +48,19 @@ public class Health : MonoBehaviour
 
     private IEnumerator invunerability()
     {
-        // player on layer 6 and enemy on 8
-        // Physics2D.IgnoreLayerCollision(6, 8, true);
+        // player on layer 6 and enemy on 7
+        Physics2D.IgnoreLayerCollision(6, 7, true);
 
         //invunerable duration
         for (int i = 0; i < numFlashes; i++)
         {
             sprietRen.color = new Color(255, 255, 255, 0.5f);
-            yield return new WaitForSeconds(iFramesDuration / numFlashes * 2);
+            yield return new WaitForSeconds(iFramesDuration / (numFlashes * 2));
             sprietRen.color = Color.white;
-            yield return new WaitForSeconds(iFramesDuration / numFlashes * 2);
+            yield return new WaitForSeconds(iFramesDuration / (numFlashes * 2));
         }
 
-        //Physics2D.IgnoreLayerCollision(6, 8, false);
+        Physics2D.IgnoreLayerCollision(6, 7, false);
     }
 
     private void OnDeath()
